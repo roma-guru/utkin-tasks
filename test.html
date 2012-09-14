@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<script type='text/javascript' src='js-sorting.js' > </script>
+		<script type='text/javascript'>
+			function testSort() {
+				var resultText = document.getElementById('results');
+				resultText.innerHTML = '';
+				var tests = [[1,7,3,7,8,9,3,7],[1,2,3,4,5], [5,4,3,2,1], [1,1,1,1,1],, [2,3,2,3,2]];
+				var methods = ['insert_sort', 'merge_sort', 'heap_sort', 'quick_sort'];
+				for each (var method in methods) {
+					resultText.innerHTML += '<h2>'+method+'</h2>';
+					for each (var test in tests)
+						resultText.innerHTML += test + ' -> ' + eval(method+'(test)') + '<br>';
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick='testSort();'>Test Sorting</button>
+		<div id='results'></div>
+	</body>
+</html>
