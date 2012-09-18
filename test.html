@@ -13,6 +13,16 @@
 						resultText.innerHTML += tests[t_i] + ' -> ' + eval(methods[key]+'(tests[t_i])') + '<br>';
 				}
 			}
+			
+			
+			function testHash(){
+				ht_size = 255;
+				var hash_table = new Array(ht_size);
+				for(var i= 0; i < ht_size; i++){
+					hash_table[i] = {key: null, val: null};
+				}
+			}
+			
 		</script>
 	</head>
 	<body>
