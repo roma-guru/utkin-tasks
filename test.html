@@ -1,6 +1,7 @@
 <html>
 	<head>
-		<script type='text/javascript' src='js-sorting.js' > </script>
+		<script type='text/javascript' src='js-sorting.js' ></script>
+		<script type='text/javascript' src='js-hash.js' ></script>
 		<script type='text/javascript'>
 			function testSort() {
 				var resultText = document.getElementById('results');
@@ -16,17 +17,21 @@
 			
 			
 			function testHash(){
-				ht_size = 255;
-				var hash_table = new Array(ht_size);
-				for(var i= 0; i < ht_size; i++){
-					hash_table[i] = {key: null, val: null};
-				}
+				window.hash_table = new HashTable(6);
+				console.log( hash_table.hash('Steve'));
+				hash_table.add('Steve','steve data value');
+				hash_table.add('Rotes','blah blah blah');
+				console.log(  hash_table.get('Rotes') );
 			}
+			
 			
 		</script>
 	</head>
 	<body>
 		<button onclick='testSort();'>Test Sorting</button>
 		<div id='results'></div>
+		
+		<button onclick='testHash();'>Test Hash</button>
+		
 	</body>
 </html>
