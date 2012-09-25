@@ -3,12 +3,8 @@
 	Created during course study at Saint Petersburg State University.
 	You may use it for any purpose, if you find it useful. 
 
-	Author: Basov Leonid
+	Implementation: Basov Leonid
 */
-
-
-
-
 
 
 function twoDimList (size){
@@ -56,24 +52,21 @@ thoDimList.prototype = {
 				return founded_cell;
 			}
 		}
-		return founded_cell;
-		
+		return founded_cell;	
 	}
-	
 	
 	remove: function (value) {
 		//remove element
 		var del_index = this.find(val)
 		if(  del_index == -1 )
 			return -1; // value not found
-		this._val[ del_index ] = nil;
+		this._val[ del_index ] = null;
 		
 		
 		//push freed cell to head of free list
 		var old_free = this._free;
 		this._free = del_index;
 		this._forw[ del_index ] = old_free;
-		//this._back[ old_free ] =
 		
 	}
 	
