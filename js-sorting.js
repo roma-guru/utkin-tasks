@@ -125,3 +125,22 @@ function swap(a, i, j) {
     a[j] = tmp;
 }
 
+// Pocket sort (for integers 0<=n< N), O(n)
+var N = 1000;
+function pocket_sort(a) {
+	var b = [];
+	var count = [];
+	for (var i = 0; i < N; i++) count[i] = 0;
+	for (var i in a) {		
+		count[a[i]]++;
+	}	
+	var k=0;
+	for (var i = 0; i < N; i++) {
+		while (count[i] > 0 ) {
+			b[k] = i;
+			count[i]--;
+			k++;
+		}
+	}
+	return b;
+}
