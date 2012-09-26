@@ -20,14 +20,21 @@ function List(capacity) {
                 this.f[this.last] = this.free;
             }
 			this.last = this.free;
-			this.f[this.free] = -1;
-            this.free = this.f[this.free];			
+			this.free = this.f[this.free];		
+			this.f[this.last] = -1;            
 			if (this.first == -1) this.first = 0;
         };
 
         this.remove_by_index = function(index) { 
 		
             if (index==-1) return "Not found";
+			if (index == this.last) {
+                this.last = this.b[this.last];
+            }
+			
+			if (index== this.first) {
+				this.first = this.f[this.first];
+			}
 			
             if (this.b[index] >=0 ) {
                 this.f[this.b[index]] = this.f[index];
@@ -35,20 +42,14 @@ function List(capacity) {
             if (this.f[index] >= 0) {
                 this.b[this.f[index]] = this.b[index];
             }
-            this.f[index] = this.free;
-            this.free = index;
-
-            if (index == this.last) {
-                this.last = this.b[this.last];
-            }
-			
-			if (index== this.first) {
-				this.first = this.f[this.first];
-			}
+            this.b[index] = this.free;
+			this.f[index] = this.f[this.free];
+            this.f[this.free] = index;
+            
         };
 		
-		this.remove_by_val = function(val) {
-			remove(find(val));
+		this.remove = function(val) {
+			this.remove_by_index(this.find(val));
 		}
         this.find = function(val) {
             var i = this.first;
