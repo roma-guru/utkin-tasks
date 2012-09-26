@@ -1,5 +1,5 @@
 /*
-	js-hash.js: Simple JS library with sorting algorithms. 
+	js-hash.js: Simple JS library with hashtable class. 
 	Created during course study at Saint Petersburg State University.
 	You may use it for any purpose, if you find it useful. 
 */

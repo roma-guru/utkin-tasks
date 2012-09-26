@@ -1,7 +1,9 @@
 <html>
 	<head>
 		<script type='text/javascript' src='js-sorting.js' ></script>
-		<script type='text/javascript' src='js-hash.js' ></script>
+		<!--<script type='text/javascript' src='js-hashtable.js' ></script> -->
+		<script src="js-hashtable.js" type="text/javascript" > </script>
+		<script src="js-bilist.js" type="text/javascript" > </script>
 		<script type='text/javascript'>
 			function testSort() {
 				var resultText = document.getElementById('results');
@@ -17,21 +19,36 @@
 			
 			
 			function testHash(){
-				window.hash_table = new HashTable(6);
-				console.log( hash_table.hash('Steve'));
-				hash_table.add('Steve','steve data value');
-				hash_table.add('Rotes','blah blah blah');
-				console.log(  hash_table.get('Rotes') );
+				var hash_table = new HashTable(6);
+				console.log(hash('Steve'));
+				hash_table.put('Steve','steve data value');
+				hash_table.put('Rotes','blah blah blah');
+				console.log( hash_table.get('Rotes') );
 			}
 			
-			
+			function testList() {
+				var list = new List(10);
+				list.add(9);
+				list.add(99);
+				list.add(4);				
+				console.log(list.find(9));
+				console.log(list.find(99));
+				console.log(list.find(4));
+				list.remove(9);
+				list.add(5);
+				console.log(list.find(5));
+				console.log(list.find(99));
+				console.log(list.find(9));
+			}
 		</script>
 	</head>
 	<body>
 		<button onclick='testSort();'>Test Sorting</button>
 		<div id='results'></div>
 		
-		<button onclick='testHash();'>Test Hash</button>
-		
+		<button onclick='testHash();'>Test Hashtable</button>
+		See JS console for results <br/>
+		<button onclick='testList();'>Test Bidirectional List</button>
+		See JS console for results
 	</body>
 </html>
