@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<script type='text/javascript' src='js-sorting-alt.js' ></script>
+		<script src="js-hashtable.js" type="text/javascript" > </script>
+		<script src="js-bilist.js" type="text/javascript" > </script>
+		<script type='text/javascript'>
+			function testSort() {
+				var resultText = document.getElementById('results');
+				resultText.innerHTML = '';
+				var tests = [[1,7,3,7,8,9,3,7],[1,2,3,4,5], [5,4,3,2,1], [1,1,1,1,1], [2,3,2,3,2]];
+				//var methods = ['insert_sort', 'merge_sort', 'heap_sort', 'quick_sort','pocket_sort'];
+				var methods = [ 'merge_sort'];
+				for (var key in methods) {
+					resultText.innerHTML += '<h2>'+methods[key]+'</h2>';
+					for (var t_i in tests)
+						resultText.innerHTML += tests[t_i] + ' -> ' + eval(methods[key]+'(tests[t_i])') + '<br>';
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<button onclick='testSort();'>Test Sorting</button>
+		<div id='results'></div>
+		
+	</body>
+</html>
