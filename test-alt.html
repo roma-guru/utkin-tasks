@@ -7,13 +7,9 @@
 			function testSort() {
 				var resultText = document.getElementById('results');
 				resultText.innerHTML = '';
-				var tests = [[1,7,3,7,8,9,3,7],[1,2,3,4,5], [5,4,3,2,1], [1,1,1,1,1], [2,3,2,3,2]];
-				//var methods = ['insert_sort', 'merge_sort', 'heap_sort', 'quick_sort','pocket_sort'];
-				var methods = [ 'merge_sort'];
-				for (var key in methods) {
-					resultText.innerHTML += '<h2>'+methods[key]+'</h2>';
-					for (var t_i in tests)
-						resultText.innerHTML += tests[t_i] + ' -> ' + eval(methods[key]+'(tests[t_i])') + '<br>';
+				var tests = [[1,9,3,7,8],[1,2,3,4,5], [5,4,3,2,1], [1,1,1,1,1], [2,3,2,3,2]];
+				for(var i=0; i< tests.length; i++){
+					resultText.innerHTML += '['+tests[i] + '] -> [' + heap_sort2( tests[i] )+']<br />';
 				}
 			}
 		</script>
