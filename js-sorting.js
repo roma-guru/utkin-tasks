@@ -127,7 +127,7 @@ function swap(a, i, j) {
 
 // Pocket sort (for integers 0<=n< N), O(n)
 var N = 1000;
-function pocket_sort(a) {
+function counting_sort(a) {
 	var b = [];
 	var count = [];
 	for (var i = 0; i < N; i++) count[i] = 0;
