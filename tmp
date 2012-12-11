@@ -1,0 +1,32 @@
+function merge_sort(ar){
+  return _merge_sort(ar, 0, ar.length);
+}
+
+// Merge Sort, O(n*ln(n))
+function _merge_sort(ar, min, max){
+	if(ar.length == 1){
+		return ar;
+	} else {
+		var middle = Math.round( max / 2);
+		var left = new Array();
+		var right = new Array();
+		var left_min = min;
+		var left_max = min;
+		for(var i=min; i < middle; i++){
+			left.push(ar[i]);
+			left_max++;
+		}
+		var right_min = middle;
+		var right_max = middle;
+		for(var j=middle; j < max; j++){
+			right.push(ar[j]);
+			right_max++;
+		}
+		//left = merge_sort(left);  //_merge_sort(ar, left_min, left_max)
+		 left =  _merge_sort(ar, left_min,  left_max);
+		 right = _merge_sort(ar, right_min, right_max);
+		//right = merge_sort(right); //_merge_sort(ar, right_min, right_max)
+		var result = merge(left, right);
+		return result;
+	}
+}
