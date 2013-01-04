@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="transform.xsl"?>
+<corporations>
+	<corp color="black" name="Growing Business">
+		<month order="1" income="10"></month>
+		<month order="2" income="20"></month>
+		<month order="3" income="39"></month>
+		<month order="4" income="42"></month>
+		<month order="5" income="55"></month>
+		<month order="6" income="60"></month>
+	</corp>
+	<corp color="blue" name="Stable Income">
+		<month order="1" income="25"></month>
+		<month order="2" income="30"></month>
+		<month order="3" income="18"></month>
+		<month order="4" income="24"></month>
+		<month order="5" income="32"></month>
+		<month order="6" income="29"></month>
+	</corp>
+	<corp color="red" name="Miserable Corporation">
+		<month order="1" income="37"></month>
+		<month order="2" income="28"></month>
+		<month order="3" income="20"></month>
+		<month order="4" income="14"></month>
+		<month order="5" income="7"></month>
+		<month order="6" income="1"></month>
+	</corp>
+</corporations>

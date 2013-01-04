@@ -1,0 +1,29 @@
+<html>
+<head>
+	<style>
+		img {
+			position: absolute;
+			width: 800;
+			height: 600;
+		}		
+	</style>
+	<script type="text/javascript">
+		window.onload=function() {
+			var tiger = document.getElementById("tiger");
+			var w = tiger.width;
+			var h = tiger.height;
+			var i=h/2;
+			var step=2;
+			var timer=setInterval(function() {
+				tiger.style.clip="rect(" + i + "px," + (w-i) + "px," + (h-i) + "px," + i + "px)";
+				i-=step;
+				if (i<0) clearInterval(timer);
+			},30);			
+		}
+	</script>
+</head>
+<body>
+	<img src="2.jpg">
+	<img src="1.jpg" id="tiger">
+</body>
+</html>

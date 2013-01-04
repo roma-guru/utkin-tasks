@@ -1,0 +1,40 @@
+<html>
+<head>
+	<script type="text/javascript">
+		var state = { i:false, b:false, u:false };
+		function myclick(button) {
+			//alert(button.style.borderColor);			
+			state[button.id] = !state[button.id];
+			if (state[button.id]) {
+				button.style.borderColor="red";
+			} else {
+				button.style.borderColor="";
+			}
+			var sel = document.selection;
+			if (sel!=null) {
+				var rng = sel.createRange();
+				if (rng!=null)
+					rng.pasteHTML("<"+button.id+">"+rng.htmlText+"</"+button.id+">");					
+			}
+			
+		}
+	</script>	
+</head>
+<body>
+	<button id="i" onclick="myclick(this);">
+		<i>i</i>
+	</button>
+	&nbsp
+	<button id="b" onclick="myclick(this);">
+		<b>b</b>
+	</button>
+	&nbsp
+	<button id="u" onclick="myclick(this);">
+		<u>u</u>
+	</button><br>
+	<div style="border: solid 1px green; width: 500; height: 300;" contenteditable="true">
+		blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+	</div>
+
+</body>
+</html>

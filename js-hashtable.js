@@ -1,3 +1,4 @@
+// Hashtable with chain collision resolution
 function HashTable(capacity) {	
 	this.capacity = capacity;
 	this.buckets = new Array();	
@@ -6,19 +7,24 @@ function HashTable(capacity) {
 }
 
 function put(str, obj) {
-	var bucket = this.buckets[hash(str)%this.capacity];
+	var index = bucketForStr(str);
+	var bucket = this.buckets[index];
 	if (bucket == undefined) 
-		bucket = this.buckets[hash(str)%this.capacity] = new Array();
+		bucket = this.buckets[index] = new Array();
 	bucket.push({key:str, val:obj});
 }
 
 function get(str) {
-	var bucket =  this.buckets[hash(str)%this.capacity];
+	var bucket =  this.buckets[bucketForStr(str)];
 	if (bucket == undefined) return undefined;
 	if (bucket.length < 2) return bucket[0].val;
 	for (var i in bucket) {
 		if (bucket[i].key == str) return bucket[i].val;
 	}	
+}
+
+function bucketForStr(str) {
+	return hash(str)%this.capacity;
 }
 
 function hash(str) {
@@ -38,7 +44,7 @@ function HashTable_oa(capacity) {
 	this.capacity = capacity;
 	this.buckets = [];	
 	this.put = put_oa;
-	this.get = get2;
+	this.get = get_oa;
 }
 
 function put_oa(str, obj) {

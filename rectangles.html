@@ -1,0 +1,68 @@
+<html>
+<head>
+<script type="text/javascript">
+	function getElementsByClass(classname) {
+		var node = document.getElementsByTagName("body")[0];
+		var a = [];
+		var re = new RegExp('\\b' + classname + '\\b');
+		var els = node.getElementsByTagName("*");
+		for(var i=0,j=els.length; i<j; i++)
+		if(re.test(els[i].className))a.push(els[i]);
+		return a;
+    }
+	
+	var divs;
+	var timer;
+	
+	var timerFunc = function() {		
+		for (var i=0; i<divs.length; i++) {
+			var div=divs[i];
+			var style = window.getComputedStyle(div);
+			var left = parseInt(style.left);
+			var top = parseInt(style.top);
+			var w = parseInt(style.width);
+			var h = parseInt(style.height);
+			
+			var pstyle = window.getComputedStyle(div.parentElement);
+			var pw = parseInt(pstyle.width);
+			var ph = parseInt(pstyle.height);
+			
+			var vx = parseInt(div.attributes["vx"].value);
+			var vy = parseInt(div.attributes["vy"].value);
+			
+			left+=vx;
+			top+=vy;
+			div.style.left = left + "px";
+			div.style.top = top + "px";
+			
+			if (left+w>pw || left<0) div.attributes["vx"].value= -vx;
+			if (top+h>ph || top<0) div.attributes["vy"].value= -vy;
+			
+		}
+		
+	}
+	window.onload = function() { 
+		divs = getElementsByClass("div"); 
+		timer = setInterval(timerFunc, 50 );
+	}	
+	window.onclose = function() { clearInterval(timer); };
+
+</script>
+<style>
+	div {position:relative; top:0; left:0; width:60%; height:60%}
+	div#red {background-color:red; width:500px; height:300px}
+	div#blue {background-color:blue}
+	div#green {background-color:green}
+</style>
+</head>
+<body>
+<div style="width:600;height:500">
+<div class="div" id="red" vx=10 vy=10>
+<div class="div" id="blue" vx=10 vy=10>
+<div class="div" id="green" vx=10 vy=10>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

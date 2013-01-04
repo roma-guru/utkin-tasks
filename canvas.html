@@ -1,0 +1,62 @@
+
+<!-- saved from url=(0065)file:///C:/Documents%20and%20Settings/s071628/Desktop/canvas.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript">
+window.onload = function() {
+	var canvas = document.getElementById("mycanvas");
+	var w = canvas.width;
+	var h = canvas.height;
+	var step = 10;
+	
+
+	if (canvas && canvas.getContext) {
+		var ctx = canvas.getContext('2d');
+		ctx.strokeStyle='#000';
+		ctx.beginPath();
+		ctx.moveTo(0, h/2);
+		for (var x=0; x<w; x+=step) {
+			ctx.lineTo(x, h/2*Math.sin(2*3.14*x/w)+h/2);
+		}		
+		ctx.stroke();
+	}
+	var r=50;
+	var pix = ctx.createImageData(r*2,r*2);
+	var n=0;
+	/*for (var ang=0; ang<2*3.14; ang+=0.01) {
+		x = parseInt(r * Math.sin(ang)) + r;
+		y = parseInt(r * Math.cos(ang)) +r;
+		n = 4*(x + y*2*r);
+		pix.data[n]=0;
+		pix.data[n+1]=255;
+		pix.data[n+2]=0;
+		pix.data[n+3]=255;
+		
+	}*/
+	x=0; y=-r;
+	while (x<=r) {
+		if (x*x + y*y > r*r) y++
+		else x++
+		putPixel(x,y);
+		putPixel(x,-y);
+		putPixel(-x,y);
+		putPixel(-x,-y);		
+	}	
+
+	ctx.putImageData(pix, 50,50);
+	
+	function putPixel(x,y) {
+		n = 4*(x + r + (y+r)*2*r);
+		pix.data[n]=0;
+		pix.data[n+1]=255;
+		pix.data[n+2]=0;
+		pix.data[n+3]=255;
+	}
+}
+</script>
+</head>
+<body>
+<canvas id="mycanvas" width="800" height="600">
+</canvas>
+
+
+</body></html>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="5d.xsl" ?>
+
+<ul>
+	        ...
+	        <li>text0</li>
+	        <li>text1 <div style="color: green;">text2</div></li>
+	        <li>text3 <div>text4</div> text5 </li>
+	        <li>text6 <ul><li>text7</li></ul> </li>
+	        <li><div>text8 <ul><li>text9</li></ul></div></li>
+	        <li>
+		        ...
+		        <ol>...</ol>
+		        ...
+	        </li>
+	        ...
+</ul>

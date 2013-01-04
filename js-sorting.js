@@ -1,8 +1,3 @@
-/*
-	simple-js-sorting: Simple JS library with sorting algorithms. 
-	Created during course study at Saint Petersburg State University.
-	You may use it for any purpose, if you find it useful. 
-*/
 
 // Insert Sort, O(n^2)
 function insert_sort(a) {
@@ -11,7 +6,7 @@ function insert_sort(a) {
 		var j=i-1;
 		var q = a[i];
 		while (j>=0 && b[j]>q) {
-			b[j+1] = b[j]
+			b[j+1] = b[j];
 			j--;
 		}
 		b[j+1]=q;
@@ -21,7 +16,7 @@ function insert_sort(a) {
 
 // Merge Sort, O(n*ln(n))
 function merge_sort(a) {
-	if (a.length<2) return a;	
+	if (a.length<2) return a;
 	var m = Math.round(a.length/2);
 	var left = a.slice(0,m);
 	var right = a.slice(m);
@@ -60,7 +55,7 @@ function heap_sort(a) {
 	var b = a.slice();
 	heapify(b, b.length);
 	var end = b.length - 1;
-	while (end>0) {
+	while (end > 0) {
 		swap(b, end, 0);
 		--end;
 		siftDown(b, 0, end);
@@ -104,7 +99,7 @@ function quick_sort(a) {
 // Helper function for Quick Sort
 function _qsort(a,p,q) {
 	if (q<=p) return;
-	var i=p,j=q,k=p;
+	var i,k=p;
 	var tmp;
 	var x=a[q];
 	for (var i=p; i<q; i++){
@@ -125,7 +120,7 @@ function swap(a, i, j) {
     a[j] = tmp;
 }
 
-// Pocket sort (for integers 0<=n< N), O(n)
+// Counting sort (for integers 0<=n< N), O(n)
 var N = 1000;
 function counting_sort(a) {
 	var b = [];
@@ -143,4 +138,38 @@ function counting_sort(a) {
 		}
 	}
 	return b;
+}
+
+var rzrd=8;
+var rzrd_size=4;
+var mask = 0xF;
+
+function radix_sort(a) {
+	b = a.slice();
+	for (var i=0; i<rzrd; i++) {
+		b=counting_sort_for_radix(b,i);
+	}
+	return b;
+}
+function counting_sort_for_radix(a, rad) {	
+	var c = new Array(mask);
+	var b = new Array(a.length);
+	for (var i = 0; i < mask; i++) c[i] = 0;
+	for (var i=0; i<a.length;i++) {		
+		c[getRad(a[i], rad)]++;
+	}	
+	var k=0;
+	for (var i=1; i	<=c.length-1; i++) {
+		c[i] +=c[i-1];
+	}
+	for (var i=a.length-1; i>=0; i--) {
+		var t=getRad(a[i], rad);		
+		c[t]--;
+		b[c[t]]=a[i];
+	}
+	return b;
+}
+
+function getRad(val, rad) {
+	return (val>>rad*rzrd_size) & mask;
 }

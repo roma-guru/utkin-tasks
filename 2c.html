@@ -1,0 +1,46 @@
+<html>
+                <head>
+                    <style MEDIA="screen,print">
+                        h1 {color:blue; font-size:10pt; background-color:cyan}
+                    </style>
+                    <style MEDIA="screen" DISABLED>
+                        h4 {color:blue; font-size:10pt; background-color:cyan}
+                    </style>
+                    <style MEDIA="print">
+                        h1 {color:gray; font-size:12pt; font-weight: bold}
+                        h2 {font-style:italic}
+                    </style>
+                    <style DISABLED>
+                        h2 {color:green; font-size:12pt}
+                    </style>
+                    <style>
+                        h3 {font-style:italic}
+                    </style>
+                </head>
+                <body>
+                    <h1>раз</h1>
+                    <h2>два</h2>
+                    <h3>три</h3>
+                    <hr>
+					<div id="out">
+					</div>
+                    <script language="Javascript">
+                    // ваш текст
+					window.onload= function() {												
+						var out = document.getElementById("out");
+						for  (var i=0; i < document.styleSheets.length; i++) {
+							stylesheet = document.styleSheets[i];
+							//alert(stylesheet.media);
+							if (stylesheet.disabled==false && (stylesheet.media.indexOf("screen")>-1 || stylesheet.media=="")) {
+								for  (var j=0; j < stylesheet.rules.length; j++) {
+									rule = stylesheet.rules[j];
+									out.innerHTML += rule.selectorText + " {<br>";
+									out.innerHTML+= "&nbsp" + rule.style.cssText+"<br>";
+									out.innerHTML += " }<br>";
+								}							
+							}
+						}
+					}
+                    </script>
+                </body>
+</html>
