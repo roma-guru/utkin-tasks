@@ -1,0 +1,95 @@
+﻿<html>
+	<head>
+		<script src="jquery-1.8.3.min.js"></script>
+		<style>
+			#edit_box {
+				width: 600px;
+				height: 400px;
+				margin-left: 2px;
+				margin-top: 5px;
+				border: 1px solid black;
+			}
+			#edit_box {
+				 outline-style: none;
+			}
+
+		</style>
+		<script>
+
+			function setTag(input_tag){
+				var tag = input_tag.toLowerCase()
+				var s = window.getSelection();
+				if(s.rangeCount > 0){
+					var r = s.getRangeAt(0);
+					var sc = r.startContainer;
+					var ec = r.endContainer;
+					if( $(sc).parentsUntil('#edit_box',tag).length == 0 && $(ec).parentsUntil('#edit_box',tag).length == 0 ){ // this is unbolded text
+						var b = document.createElement(tag);
+						r.surroundContents(b);	
+					}else{
+						var par = $(sc).parentsUntil('#edit_box',tag);
+						
+						if(sc === ec ){
+							var par_node = sc.parentNode;
+							var txt = sc.nodeValue;
+							var pre = '<'+tag+'>'+txt.substring(0, r.startOffset) + '</'+tag+'>';
+							var mid = txt.substring(r.startOffset, r.endOffset);
+							var end = '<'+tag+'>'+txt.substring(r.endOffset)+'</'+ tag +'>';
+							if(par_node.nodeName == tag.toUpperCase()){ 
+								var rep = $(pre+mid+end);
+								if(par_node.childNodes.length == 1 && par_node.childNodes[0] == sc ){
+									$(par_node).replaceWith(rep);
+									console.log('just text inside <b> tag');
+								}else{
+									
+									console.log(sc)
+									var childs = $(par_node).contents().filter(function(){
+										return !(this == sc);
+									}).wrap('<'+tag+' />');
+									$(sc).replaceWith($(pre+mid+end) );
+									$(par_node).replaceWith( $(par_node).contents()  );
+								}
+							}else{
+								var f = $(par_node).html(pre+mid+end);
+								var childs  = par.contents().filter(function()
+									{
+										return $(this).find(tag).length == 0;
+									}).wrap('<'+tag+' />');
+								par.replaceWith( par.contents() );
+
+							}
+						}else {
+							console.log('hard case');
+							var start_html = sc.nodeValue;
+							var start_pre = start_html.slice(0, r.startOffset);
+							var start_end = "<"+tag+">"+start_html.slice(r.startOffset);
+							$(sc).replaceWith(start_pre+start_end);
+							var end_html = ec.nodeValue;
+							var end_replacement = end_html.slice(0, r.endOffset)+'</'+tag+'>'+end_html.slice(r.endOffset);
+							$(ec).replaceWith(end_replacement);
+
+						}
+
+					}
+
+					
+				}
+
+			}
+		</script>
+	</head>
+	<body class="txt">
+       
+
+		<button onclick="setTag('b')"><b>b</b></button>
+		<button onclick="setTag('i')"><i>i</i></button>
+		<button onclick="setTag('u')"><u>u</u></button>
+		<br/>
+		<div id="edit_box" contenteditable="true">
+			This is a <b><i>bold italic</i> and just bold</b> test.
+		</div>
+
+
+    </body>
+
+</html>

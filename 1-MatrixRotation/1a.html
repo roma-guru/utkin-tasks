@@ -1,0 +1,61 @@
+<html>
+<head>
+	<script type="text/javascript">
+		function doJob() {
+			var form=document.forms[0];
+			var M=parseInt(form.M.value);
+			var N=parseInt(form.N.value);
+			
+			var arr=new Array(M);
+			for (var i=0; i<M; i++) {
+				arr[i]=new Array(N);
+				for (var j=0; j<N; j++) {
+					arr[i][j] = i+j;
+				}
+			}
+			
+			printTo("in",arr);
+			arr=rotate(arr);
+			printTo("out",arr);
+		}
+		
+		function printTo(elem,arr) {			
+			var M=arr.length;
+			var N=arr[0].length;
+			var out=document.getElementById(elem);
+			for (var i=0; i<M; i++) {
+				for (var j=0; j<N; j++) {
+					out.innerHTML+=arr[i][j] + " ";
+				}
+				out.innerHTML+="<br>";
+			}
+		}
+		
+		function rotate(arr) {
+			b=new Array(arr[0].length);
+			for (var i=0; i<b.length; i++) {
+				b[i]=new Array(arr.length);
+			}
+			for (var i=0; i<arr.length; i++) {
+				for (var j=0; j<arr[i].length; j++) {					
+					b[j][i]=arr[arr.length-i-1][j];
+				}
+			}
+			return b;
+		}
+	</script>
+</head>
+<body>
+	<form id="form">
+		M: <input name="M" type="text" value="3"/> <br>
+		N: <input name="N" type="text" value="4"/> <br>
+		<button type="button" onclick="doJob()">Rotate</button>
+	</form>
+	<div id="in">
+		Input:<br>
+	</div>
+	<div id="out">
+		Output:<br>
+	</div>
+</body>
+</html>
