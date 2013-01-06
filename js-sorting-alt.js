@@ -1,4 +1,4 @@
-/*
+ /*
 	simple-js-sorting: Simple JS library with sorting algorithms. 
 	Created during course study at Saint Petersburg State University.
 	You may use it for any purpose, if you find it useful.
@@ -10,18 +10,21 @@
 
 // Merge Sort, O(n*ln(n))
 function merge_sort(ar){
-	if(ar.length == 1){
-		return ar;
+  var res = _merge_sort(ar, 0, ar.length-1);
+  return res;
+}
+
+// Merge Sort, O(n*ln(n))
+function _merge_sort(ar, min, max){
+	if(max == min){
+		return [ar[min]];
 	} else {
-		var middle = Math.round(ar.length / 2);
+		var middle =  min + Math.round( (max-min) / 2 );
 		var left = new Array();
 		var right = new Array();
-		for(var i=0; i < middle; i++)
-			left.push(ar[i]);
-		for(var j=middle; j < ar.length; j++)
-			right.push(ar[j]);
-		left = merge_sort(left);
-		right = merge_sort(right);
+		left  = _merge_sort(ar, min, middle-1);
+		right = _merge_sort(ar, middle, max);
+		console.log(left, right);
 		var result = merge(left, right);
 		return result;
 	}
