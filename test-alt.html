@@ -1,21 +1,33 @@
 <html>
 	<head>
 		<script type='text/javascript' src='js-sorting-alt.js' ></script>
-		<script src="js-hashtable.js" type="text/javascript" > </script>
+		<script src="js-hashtable-alt.js" type="text/javascript" > </script>
 		<script src="js-bilist.js" type="text/javascript" > </script>
 		<script type='text/javascript'>
 			function testSort() {
 				var resultText = document.getElementById('results');
 				resultText.innerHTML = '';
-				var tests = [[1,9,3,7,8],[1,2,3,4,5], [5,4,3,2,1], [1,1,1,1,1], [2,3,2,3,2]];
+				var tests = [[1,9,3,7,8,1],[1,2,3,4,5], [5,4,3,2,1], [1,1,1,1,1], [2,3,2,3,2]];
+				//var tests = [[1,9,3,7,8,1]];
+				resultText.innerHTML += '<h1>Merge sort</h1>'
 				for(var i=0; i< tests.length; i++){
-					resultText.innerHTML += '['+tests[i] + '] -> [' + heap_sort2( tests[i] )+']<br />';
+					resultText.innerHTML += '['+tests[i] + '] -> [' + merge_sort( tests[i] )+']<br />';
 				}
+			}
+
+			function testHash(){
+				var ht = new HashTable(5);
+				ht.add('TestBoolean', true);
+				ht.add('TestInt', 10);
+				ht.add('TestDouble', 20.56);
+
+				console.log( ht.get('TestInt'))
 			}
 		</script>
 	</head>
 	<body>
 		<button onclick='testSort();'>Test Sorting</button>
+		<button onclick='testHash();'>Test HashTable</button>
 		<div id='results'></div>
 		
 	</body>

@@ -24,7 +24,6 @@ function _merge_sort(ar, min, max){
 		var right = new Array();
 		left  = _merge_sort(ar, min, middle-1);
 		right = _merge_sort(ar, middle, max);
-		console.log(left, right);
 		var result = merge(left, right);
 		return result;
 	}
