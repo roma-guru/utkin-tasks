@@ -31,7 +31,6 @@ function merge(ar, min, middle, max){
 	var right= ar.slice(middle, max);
 	left[size_left -1]   = 1000000;
 	right[size_right -1] = 1000000;
-	console.log(left, size_left);
 	var i = 0;
 	var j = 0;
 	for( var k= min; k < max; ++k){
