@@ -10,42 +10,41 @@
 
 // Merge Sort, O(n*ln(n))
 function merge_sort(ar){
-  var res = _merge_sort(ar, 0, ar.length-1);
-  return res;
+  _merge_sort(ar, 0, ar.length);
+  return ar;
 }
 
 // Merge Sort, O(n*ln(n))
 function _merge_sort(ar, min, max){
-	if(max == min){
-		return [ar[min]];
-	} else {
-		var middle =  min + Math.round( (max-min) / 2 );
-		var left = new Array();
-		var right = new Array();
-		left  = _merge_sort(ar, min, middle-1);
-		right = _merge_sort(ar, middle, max);
-		var result = merge(left, right);
-		return result;
+	if( (max - min) > 1){
+		var middle =  Math.floor( (max+min) / 2 );
+		_merge_sort(ar, min, middle);
+		_merge_sort(ar, middle, max);
+		merge(ar, min, middle, max);
 	}
 }
 
-function merge(left, right){
-	var result = new Array();
-	while (left.length > 0  && right.length > 0){
-		if( left[0] <= right[0] ){
-			result.push( left[0] );
-			left.shift();
-		}else {
-			result.push(right[0]);
-			right.shift();
-		}
+function merge(ar, min, middle, max){
+	var size_left  = middle - min + 1;
+	var size_right = max - middle + 1;
+	var left = ar.slice(min, middle);
+	var right= ar.slice(middle, max);
+	left[size_left -1]   = 1000000;
+	right[size_right -1] = 1000000;
+	console.log(left, size_left);
+	var i = 0;
+	var j = 0;
+	for( var k= min; k < max; ++k){
+		if(left[i] < right[j])
+			ar[k] = left[i++];
+		else
+			ar[k] = right[j++];
 	}
-	if (left.length > 0)
-		result = result.concat(left);
-	if( right.length > 0)
-		result = result.concat(right);
-	return result;
 }
+
+
+
+
 
 
 function bubble_sort(ar){
